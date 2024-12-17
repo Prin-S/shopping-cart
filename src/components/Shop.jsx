@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Navbar } from './Navbar.jsx';
 import '../styles/styles.css';
 
-function App() {
+function Shop() {
 
   return (
     <>
       <div>
         <Navbar />
-        Home
+        Shop
       </div>
     </>
   )
 }
 
-export { App };
+export { Shop };

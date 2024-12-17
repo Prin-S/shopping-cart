@@ -1,3 +1,3 @@
-# vite-template
+# shopping-cart
 
-A Vite template
+Project for https://www.theodinproject.com/lessons/node-path-react-new-shopping-cart
