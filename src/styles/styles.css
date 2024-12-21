@@ -36,7 +36,6 @@ p, h3 {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(50px, auto);
   column-gap: 10px;
   row-gap: 10px;
@@ -46,6 +45,10 @@ p, h3 {
   padding: 10px;
   border: dashed mediumspringgreen;
   border-radius: 10px;
+}
+
+.container-four {
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .container-nav {

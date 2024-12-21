@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 function Product({ details, onAddToCart }) {
 
   return (
-    <div className="box">
+    <div id={details.id} className="box">
       <img className="img" src={details.image} />
       <h2 className="product-title">{details.title}</h2>
       <p>{`$${details.price}`}</p>
-      <form onSubmit={onAddToCart}>
+      <form id={details.id} onSubmit={onAddToCart}>
         <label htmlFor="amount">Amount: <input type="number" name="amount" min="1" size="3" defaultValue="1" /></label><br />
         <button className="button" type="submit">Add to Cart</button>
       </form>
@@ -24,7 +24,7 @@ Product.propTypes = {
 function ProductBox({ items, onAddToCart }) {
 
   return (
-    <div className="container">
+    <div className="container container-four">
       {items.map(item => {
         return <Product key={item.id} details={item} onAddToCart={onAddToCart} />
       })}
@@ -44,7 +44,9 @@ function Shop() {
     return (
       <>
         <h1>Shop</h1>
-        <p>Loading...</p>
+        <div className="container">
+          <p>Loading...</p>
+        </div>
       </>
     );
   }
@@ -53,8 +55,10 @@ function Shop() {
     return (
       <>
         <h1>Shop</h1>
-        <p>An error has occurred.</p>
-        <p>{`${error}`}</p>
+        <div className="container">
+          <p>An error has occurred.</p>
+          <p>{`${error}`}</p>
+        </div>
       </>
     );
   }

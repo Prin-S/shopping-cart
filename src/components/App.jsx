@@ -11,7 +11,10 @@ function useFetchProducts() {
   useEffect(() => {
     fetch('https://fakestoreapi.com/products', {mode: 'cors'})
       .then(response => response.json())
-      .then(response => setItems(response))
+      .then(response => {
+        response.map(item => item.count = 0);
+        setItems(response);
+      })
       .catch(error => setError(error))
       .finally(() => setLoading(false));
   }, []);
@@ -25,6 +28,7 @@ function App() {
 
   function handleAddToCart(e) {
     e.preventDefault();
+    items.find(item => item.id == e.target.id).count += Number(e.target[0].value);
     setCartCount(cartCount + Number(e.target[0].value));
   }
 
