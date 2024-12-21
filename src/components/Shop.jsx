@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { useOutletContext } from "react-router-dom";
 import PropTypes from 'prop-types';
 
@@ -5,11 +6,13 @@ function Product({ details, onAddToCart }) {
 
   return (
     <div id={details.id} className="box">
-      <img className="img" src={details.image} />
-      <h2 className="product-title">{details.title}</h2>
-      <p>${details.price}</p>
+      <Link to={`/shop/${details.id}`}>
+        <img className="img" src={details.image} />
+        <h2 className="product-title">{details.title}</h2>
+      </Link>
+      <p><strong>${details.price}</strong></p>
       <form id={details.id} onSubmit={onAddToCart}>
-        <label htmlFor="amount">Quantity: <input type="number" name="amount" min="1" size="1" defaultValue="1" /></label><br />
+        <label className="quantity-box" htmlFor="amount"><input type="number" name="amount" min="1" size="1" defaultValue="1" /></label>
         <button className="button" type="submit">Add to Cart</button>
       </form>
     </div>

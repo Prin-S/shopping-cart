@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 function CartItem({ details, onChangeValue, onClickX }) {
 
   return (
-    <div id={details.id} className="cart-box">
-      <img className="cart-img" src={details.image} />
-      <p className="product-title cart-item-name"><strong>{details.title}</strong></p>
+    <div id={details.id} className="container-cart">
+      <Link to={`/shop/${details.id}`}><img className="cart-img" src={details.image} /></Link>
+      <h2 className="product-title cart-item-name"><Link to={`/shop/${details.id}`}><strong>{details.title}</strong></Link></h2>
       <p>${details.price}</p>
       <label htmlFor="amount"><input id={details.id} type="number" name="amount" min="1" size="1" defaultValue={details.count} onChange={onChangeValue} /></label>
       <p>${Math.round((details.subtotal + Number.EPSILON) * 100) / 100}</p>
@@ -37,7 +37,7 @@ function CartBox({ items, onChangeValue, onClickX }) {
 
   return (
     <div className="container">
-      <div className="cart-box">
+      <div className="container-cart">
         <p className="cart-product"><strong>Product</strong></p>
         <p><strong>Price</strong></p>
         <p><strong>Quantity</strong></p>

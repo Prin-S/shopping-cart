@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { Navbar } from './Navbar.jsx';
+import { ProductDetails } from './ProductDetails.jsx';
 import '../styles/styles.css';
 
 function useFetchProducts() {
@@ -28,6 +29,7 @@ function useFetchProducts() {
 function App() {
   const { items, error, loading } = useFetchProducts();
   const [cartCount, setCartCount] = useState(0);
+  const { id } = useParams();
 
   function handleAddToCart(e) {
     e.preventDefault();
@@ -48,6 +50,15 @@ function App() {
     items.find(item => item.id == e.target.id).count = 0;
     items.find(item => item.id == e.target.id).subtotal = 0;
     setCartCount(cartCount - valueToDecrease);
+  }
+
+  if (id) {
+    return (
+      <>
+        <Navbar cartCount={cartCount} />
+        <ProductDetails items={items} onAddToCart={handleAddToCart} />
+      </>
+    );
   }
 
   return (

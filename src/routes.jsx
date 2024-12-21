@@ -15,6 +15,10 @@ const routes = [
       { path: 'checkout', element: <Checkout /> },
     ],
   },
+  {
+    path: 'shop/:id',
+    element: <App />
+  },
 ];
 
 export { routes };
