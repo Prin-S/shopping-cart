@@ -18,14 +18,13 @@ NavButton.propTypes = {
 
 function Navbar() {
 
-    return (
-      <>
-        <div className="container">
-          <NavButton link="" text="Home" />
-          <NavButton link="shop" text="Shop" />
-        </div>
-      </>
-    )
-  }
+  return (
+    <div className="container-nav">
+      <NavButton link="" text="Home" />
+      <NavButton link="shop" text="Shop" />
+      <NavButton link="cart" text="Cart" />
+    </div>
+  );
+}
 
 export { Navbar };
