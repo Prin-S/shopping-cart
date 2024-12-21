@@ -32,10 +32,22 @@ function App() {
     setCartCount(cartCount + Number(e.target[0].value));
   }
 
+  function handleChangeInCart(e) {
+    const valueToDecrease = items.find(item => item.id == e.target.id).count;
+    items.find(item => item.id == e.target.id).count = e.target.value;
+    setCartCount(cartCount - valueToDecrease + Number(e.target.value));
+  }
+
+  function handleRemoveFromCart(e) {
+    const valueToDecrease = items.find(item => item.id == e.target.id).count;
+    items.find(item => item.id == e.target.id).count = 0;
+    setCartCount(cartCount - valueToDecrease);
+  }
+
   return (
     <>
       <Navbar cartCount={cartCount} />
-      <Outlet context={{ items, error, loading, handleAddToCart }} />
+      <Outlet context={{ items, error, loading, handleAddToCart, handleChangeInCart, handleRemoveFromCart }} />
     </>
   );
 }

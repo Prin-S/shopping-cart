@@ -4,20 +4,16 @@ import PropTypes from 'prop-types';
 function NavButton({ link, text, cartCount }) {
   if (link == 'cart') {
     return (
-      <div>
-        <Link to={"/" + link}>
-          <button className="button">{text} <span>{cartCount}</span></button>
-        </Link>
-      </div>
+      <Link to={'/' + link}>
+        <button className="button">{text} <span>{cartCount}</span></button>
+      </Link>
     );
   }
   
   return (
-    <div>
-      <Link to={"/" + link}>
-        <button className="button">{text}</button>
-      </Link>
-    </div>
+    <Link to={'/' + link}>
+      <button className="button">{text}</button>
+    </Link>
   );
 }
 
