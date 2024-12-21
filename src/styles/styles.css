@@ -63,9 +63,14 @@ p, h3 {
 }
 
 .img {
-  height: 50%;
-  width: 50%;
-  object-fit: contain;
+  height: 150px;
+  width: 150px;
+  object-fit: scale-down;
+  margin-top: 10px;
+}
+
+.product-title {
+  font-size: 1em;
 }
 
 .box {
