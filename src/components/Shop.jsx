@@ -34,7 +34,7 @@ ProductBox.propTypes = {
   items: PropTypes.array,
 };
 
-function Shop() {
+function useFetchProducts() {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -46,6 +46,12 @@ function Shop() {
       .catch(error => setError(error))
       .finally(() => setLoading(false));
   }, []);
+
+  return { items, error, loading };
+}
+
+function Shop() {
+  const { items, error, loading } = useFetchProducts();
 
   if (loading) {
     return (
