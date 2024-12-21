@@ -7,9 +7,9 @@ function Product({ details, onAddToCart }) {
     <div id={details.id} className="box">
       <img className="img" src={details.image} />
       <h2 className="product-title">{details.title}</h2>
-      <p>{`$${details.price}`}</p>
+      <p>${details.price}</p>
       <form id={details.id} onSubmit={onAddToCart}>
-        <label htmlFor="amount">Amount: <input type="number" name="amount" min="1" size="3" defaultValue="1" /></label><br />
+        <label htmlFor="amount">Quantity: <input type="number" name="amount" min="1" size="1" defaultValue="1" /></label><br />
         <button className="button" type="submit">Add to Cart</button>
       </form>
     </div>

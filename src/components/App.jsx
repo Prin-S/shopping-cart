@@ -12,7 +12,10 @@ function useFetchProducts() {
     fetch('https://fakestoreapi.com/products', {mode: 'cors'})
       .then(response => response.json())
       .then(response => {
-        response.map(item => item.count = 0);
+        response.map(item => {
+          item.count = 0;
+          item.subtotal = 0;
+        });
         setItems(response);
       })
       .catch(error => setError(error))
@@ -29,18 +32,21 @@ function App() {
   function handleAddToCart(e) {
     e.preventDefault();
     items.find(item => item.id == e.target.id).count += Number(e.target[0].value);
+    items.find(item => item.id == e.target.id).subtotal += Number(e.target[0].value) * items.find(item => item.id == e.target.id).price;
     setCartCount(cartCount + Number(e.target[0].value));
   }
 
   function handleChangeInCart(e) {
     const valueToDecrease = items.find(item => item.id == e.target.id).count;
     items.find(item => item.id == e.target.id).count = e.target.value;
+    items.find(item => item.id == e.target.id).subtotal = Number(e.target.value) * items.find(item => item.id == e.target.id).price;
     setCartCount(cartCount - valueToDecrease + Number(e.target.value));
   }
 
   function handleRemoveFromCart(e) {
     const valueToDecrease = items.find(item => item.id == e.target.id).count;
     items.find(item => item.id == e.target.id).count = 0;
+    items.find(item => item.id == e.target.id).subtotal = 0;
     setCartCount(cartCount - valueToDecrease);
   }
 
