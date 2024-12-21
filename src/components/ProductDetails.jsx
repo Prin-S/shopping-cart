@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { useParams } from "react-router-dom";
 import PropTypes from 'prop-types';
 
@@ -12,7 +13,7 @@ function ProductDetails({ items, onAddToCart }) {
         <div className="container-product-details">
           <img className="product-details-img" src={currProduct.image} />
           <div className="product-details-text">
-            <p><strong>${currProduct.price}</strong></p>
+            <p><strong>${currProduct.price.toFixed(2)}</strong></p>
             <p>{currProduct.description}</p>
             <br />
             <form id={currProduct.id} onSubmit={onAddToCart}>
@@ -20,7 +21,7 @@ function ProductDetails({ items, onAddToCart }) {
               <button className="button" type="submit">Add to Cart</button>
             </form>
             <br />
-            <p><strong>Category:</strong> {currProduct.category}</p>
+            <p><strong>Category:</strong> <Link to={`/shop/category/${currProduct.categoryLink}`}>{currProduct.category}</Link></p>
             <p><strong>Rating:</strong> {currProduct.rating.rate} from {currProduct.rating.count} votes</p>
           </div>
         </div>
@@ -33,6 +34,5 @@ ProductDetails.propTypes = {
   items: PropTypes.array,
   onAddToCart: PropTypes.func,
 };
-
 
 export { ProductDetails };

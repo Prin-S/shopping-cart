@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useParams } from "react-router-dom";
 import { Navbar } from './Navbar.jsx';
 import { ProductDetails } from './ProductDetails.jsx';
+import { Category } from './Category.jsx';
 import '../styles/styles.css';
 
 function useFetchProducts() {
@@ -16,6 +17,7 @@ function useFetchProducts() {
         response.map(item => {
           item.count = 0;
           item.subtotal = 0;
+          item.categoryLink = item.category.replaceAll(' ', '-').replaceAll(`'`,'');
         });
         setItems(response);
       })
@@ -30,6 +32,7 @@ function App() {
   const { items, error, loading } = useFetchProducts();
   const [cartCount, setCartCount] = useState(0);
   const { id } = useParams();
+  const { category } = useParams();
 
   function handleAddToCart(e) {
     e.preventDefault();
@@ -40,7 +43,7 @@ function App() {
 
   function handleChangeInCart(e) {
     const valueToDecrease = items.find(item => item.id == e.target.id).count;
-    items.find(item => item.id == e.target.id).count = e.target.value;
+    items.find(item => item.id == e.target.id).count = Number(e.target.value);
     items.find(item => item.id == e.target.id).subtotal = Number(e.target.value) * items.find(item => item.id == e.target.id).price;
     setCartCount(cartCount - valueToDecrease + Number(e.target.value));
   }
@@ -57,6 +60,15 @@ function App() {
       <>
         <Navbar cartCount={cartCount} />
         <ProductDetails items={items} onAddToCart={handleAddToCart} />
+      </>
+    );
+  }
+
+  if (category) {
+    return (
+      <>
+        <Navbar cartCount={cartCount} />
+        <Category items={items} onAddToCart={handleAddToCart} />
       </>
     );
   }

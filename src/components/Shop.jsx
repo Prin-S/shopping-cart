@@ -3,14 +3,13 @@ import { useOutletContext } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 function Product({ details, onAddToCart }) {
-
   return (
     <div id={details.id} className="box">
       <Link to={`/shop/${details.id}`}>
         <img className="img" src={details.image} />
         <h2 className="product-title">{details.title}</h2>
       </Link>
-      <p><strong>${details.price}</strong></p>
+      <p><strong>${details.price.toFixed(2)}</strong></p>
       <form id={details.id} onSubmit={onAddToCart}>
         <label className="quantity-box" htmlFor="amount"><input type="number" name="amount" min="1" size="1" defaultValue="1" /></label>
         <button className="button" type="submit">Add to Cart</button>
@@ -25,7 +24,6 @@ Product.propTypes = {
 };
 
 function ProductBox({ items, onAddToCart }) {
-
   return (
     <div className="container container-four">
       {items.map(item => {
@@ -74,4 +72,4 @@ function Shop() {
   );
 }
 
-export { Shop };
+export { Shop, ProductBox };

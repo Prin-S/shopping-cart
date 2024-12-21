@@ -19,6 +19,10 @@ const routes = [
     path: 'shop/:id',
     element: <App />
   },
+  {
+    path: 'shop/category/:category',
+    element: <App />
+  },
 ];
 
 export { routes };

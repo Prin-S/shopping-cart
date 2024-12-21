@@ -3,14 +3,13 @@ import { useOutletContext } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 function CartItem({ details, onChangeValue, onClickX }) {
-
   return (
     <div id={details.id} className="container-cart">
       <Link to={`/shop/${details.id}`}><img className="cart-img" src={details.image} /></Link>
       <h2 className="product-title cart-item-name"><Link to={`/shop/${details.id}`}><strong>{details.title}</strong></Link></h2>
-      <p>${details.price}</p>
+      <p>${details.price.toFixed(2)}</p>
       <label htmlFor="amount"><input id={details.id} type="number" name="amount" min="1" size="1" defaultValue={details.count} onChange={onChangeValue} /></label>
-      <p>${Math.round((details.subtotal + Number.EPSILON) * 100) / 100}</p>
+      <p>${(Math.round((details.subtotal + Number.EPSILON) * 100) / 100).toFixed(2)}</p>
       <div>
         <button id={details.id} className="button" onClick={onClickX}>X</button>
       </div>
@@ -26,8 +25,8 @@ CartItem.propTypes = {
 
 function CartBox({ items, onChangeValue, onClickX }) {
   let total = 0;
-  items.map(item => total += item.subtotal);
-  total = Math.round((total + Number.EPSILON) * 100) / 100; // https://stackoverflow.com/a/11832950/20189502
+  items.map(item => total += item.subtotal); // Find the cart total.
+  total = (Math.round((total + Number.EPSILON) * 100) / 100).toFixed(2); // https://stackoverflow.com/a/11832950/20189502
 
   if (items.every(item => item.count == 0)) {
     return (
@@ -45,7 +44,7 @@ function CartBox({ items, onChangeValue, onClickX }) {
       </div>
       {items.map(item => {
         if (item.count > 0) {
-          return <CartItem key={item.id} details={item} onChangeValue={onChangeValue} onClickX={onClickX} />
+          return <CartItem key={item.id} details={item} onChangeValue={onChangeValue} onClickX={onClickX} />;
         }
       })}
       <div className="container-nav">
