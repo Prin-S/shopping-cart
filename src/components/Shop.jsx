@@ -67,6 +67,9 @@ function Shop() {
   return (
     <>
       <h1>Shop</h1>
+      <Link to="/shop/21">Example non-existent product</Link>
+      <br />
+      <Link to="/shop/category/etc">Example non-existent category</Link>
       <ProductBox items={items} onAddToCart={handleAddToCart} />
     </>
   );

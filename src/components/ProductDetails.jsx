@@ -1,11 +1,18 @@
 import { Link } from 'react-router';
 import { useParams } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { Error } from './Error.jsx';
 
 function ProductDetails({ items, onAddToCart }) {
   const { id } = useParams();
   const currProduct = items.find(item => item.id == id);
-  
+
+  if(!currProduct) { // If the product does not exist,
+    return (
+        <Error />
+    );
+  }
+
   return (
     <>
       <h1>{currProduct.title}</h1>
