@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { ProductBox } from "./Shop.jsx";
 import { Error } from './Error.jsx';
 
-function Category({ items, onAddToCart }) {
+function Category() {
+  const { items, handleAddToCart } = useOutletContext();
   const { category } = useParams();
 
   if(!items.find(item => item.categoryLink == category)) { // If the category does not exist,
@@ -25,14 +26,14 @@ function Category({ items, onAddToCart }) {
   return (
     <>
       <h1>{catNameBeautified}</h1>
-      <ProductBox items={selected} onAddToCart={onAddToCart} />
+      <ProductBox items={selected} onAddToCart={handleAddToCart} />
     </>
   );
 }
 
 Category.propTypes = {
   items: PropTypes.array,
-  onAddToCart: PropTypes.func,
+  handleAddToCart: PropTypes.func,
 };
 
 export { Category };

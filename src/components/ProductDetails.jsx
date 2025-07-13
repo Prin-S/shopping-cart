@@ -1,9 +1,10 @@
 import { Link } from 'react-router';
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { Error } from './Error.jsx';
 
-function ProductDetails({ items, onAddToCart }) {
+function ProductDetails() {
+  const { items, handleAddToCart } = useOutletContext();
   const { id } = useParams();
   const currProduct = items.find(item => item.id == id);
 
@@ -23,7 +24,7 @@ function ProductDetails({ items, onAddToCart }) {
             <p><strong>${currProduct.price.toFixed(2)}</strong></p>
             <p>{currProduct.description}</p>
             <br />
-            <form id={currProduct.id} onSubmit={onAddToCart}>
+            <form id={currProduct.id} onSubmit={handleAddToCart}>
               <label className="quantity-box" htmlFor="amount"><input type="number" name="amount" min="1" size="1" defaultValue="1" /></label>
               <button className="button" type="submit">Add to Cart</button>
             </form>
@@ -39,7 +40,7 @@ function ProductDetails({ items, onAddToCart }) {
 
 ProductDetails.propTypes = {
   items: PropTypes.array,
-  onAddToCart: PropTypes.func,
+  handleAddToCart: PropTypes.func,
 };
 
 export { ProductDetails };
